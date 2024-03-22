@@ -1,0 +1,62 @@
+.homeContainer {
+    padding: 20px 45px;
+    min-height: 100vh;
+    margin-top: 1px;
+    background-image: linear-gradient(174.2deg, rgba(255, 244, 228, 1) 7.1%, rgba(240, 246, 238, 1) 67.4%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .eventDiscoveryContainer {
+        flex-direction: column;
+    }
+}
+
+.imageContainer {
+    width: 50%;
+}
+.imageContainer img {
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.textAndButtonContainer {
+    width: 40%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.textWrapper {
+    margin-bottom: 20px;
+}
+
+
+.textWrapper h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 55px
+}
+
+.textWrapper p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.textAndButtonContainer .MuiButton-root {
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+.inputFields{
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 12px;
+
+}

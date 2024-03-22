@@ -1,0 +1,32 @@
+.event-card {
+    width: 700px;
+    height: 275px;
+    margin: 20px;
+    display: flex;
+    overflow: hidden;
+}
+
+.event-image {
+    flex: 1;
+    object-fit: cover;
+    max-width: 50%;
+}
+.events-detail{
+    flex: 1;
+    padding: 16px 20px
+}
+.event-name {
+    font-size: 1.2rem;
+}
+
+.event-description {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.register-button {
+    margin-top: 10px;
+}
+.event-card-text{
+    font-size: 28px;
+}

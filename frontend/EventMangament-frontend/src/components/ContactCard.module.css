@@ -1,0 +1,79 @@
+.contactContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+
+}
+
+.contactCard {
+    background: transparent;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 40px;
+    width: 400px;
+    backdrop-filter: blur(50px);
+    border: 2px solid rgba(255,255,255,.2);
+}
+
+.contactCard h2 {
+    margin-bottom: 20px;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    color:#010409 ;
+}
+.formGroup  input::placeholder,
+.formGroup textarea::placeholder{
+    color: #010409;
+}
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    /*border: 2px solid rgba(26, 21, 21, 0.2);*/
+    /*border-radius: 15px;*/
+    color: #010409;
+    padding: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #010409;
+    color:#e9ecef;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #010409;
+}
+.inputFields{
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: 2px solid rgba(26, 21, 21, 0.2);
+    border-radius: 15px;
+    color: #010409;
+    padding: 5px;
+}
+
+.button{
+    color:#e9ecef;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 15px;
+}
