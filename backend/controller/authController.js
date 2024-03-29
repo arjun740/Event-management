@@ -21,7 +21,6 @@ exports.signup = catchAsync(async (req, res, next) => {
     const { username, email, password } = req.body;
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-        console.log(existingUser)
         return next(new AppError('Username or email already exists', 400));
     }
 
@@ -91,7 +90,8 @@ exports.protect = catchAsync(async (req, res, next) => {
             )
         );
     }
-
     req.user = currentUser;
+    console.log(req.user['_id'])
     next();
 });
+

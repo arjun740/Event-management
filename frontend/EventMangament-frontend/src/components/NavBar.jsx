@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './NavBar.css'
 
@@ -26,7 +25,7 @@ function NavBar() {
             <ul className="nav-links">
                 <li><Link to="/">Home</Link></li>
                 <li>
-                    <button onClick={handleEventsClick}>Events</button>
+                    <button className={"btn-event"} onClick={handleEventsClick}>Events</button>
                 </li>
                 <li><Link to="/">Contact</Link></li>
                 {isLoggedIn ? (

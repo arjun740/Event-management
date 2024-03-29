@@ -27,5 +27,7 @@ router.post('/eventRegistration',authController.protect,validateRegistration,reg
 //EVENTS
 router.post('/events', authController.protect,validateEvent, eventController.addEvent)
     .get('/events', authController.protect,eventController.getAllEvents);
-
+router.get('/eventLocations',authController.protect,eventController.eventLocaions)
+router.get('/eventsList',authController.protect,eventController.autoComplete)
+router.get('/:id',authController.protect,eventController.getEvent)
 module.exports = router;

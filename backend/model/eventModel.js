@@ -91,7 +91,7 @@ const initialEvents = [
         image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         registration_deadline: new Date('2024-04-13T00:00:00.000Z'), // Corrected date format
         organizer: '65fbccac769984fe46c830a1',
-        category: 'concert'
+        category: 'social-gathering'
     },
 ];
 
@@ -103,5 +103,5 @@ const insertInitialData = async () => {
         console.error('Error inserting initial data:', error);
     }
 };
-insertInitialData()
+// insertInitialData()
 module.exports = Event;

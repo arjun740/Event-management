@@ -1,36 +1,38 @@
 import './EventCard.css'
 import {Card, CardContent, CardMedia, Typography, Button, Snackbar} from '@mui/material';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from 'axios';
-import conference from './../assets/conference.jpg'
-import workshops from './../assets/workshops.jpg'
-import socialGathering from './../assets/social gathering.jpg'
-import seminar from './../assets/seminar.jpg'
 
 const EventCard = ({ event }) => {
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
     const [registrationError, setRegistrationError] = useState(false);
 
+    const date = new Date(event.date);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const readableDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day} `
+
     const handleRegister = () => {
-        const user_id = localStorage.getItem('user_id');
         const event_id = event.id;
         const token = localStorage.getItem('token');
+        const user_id = localStorage.getItem('token');
 
-        axios.post('http://localhost:3000/event/eventRegistration', { user_id, event_id }, {
+        axios.post('http://localhost:3000/event/eventRegistration', {event_id,user_id }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        })
-            .then(response => {
+        }).then((response) => {
+                console.log(response.data)
                 setRegistrationSuccess(true);
                 setRegistrationError(false);
             })
-            .catch(error => {
+            .catch((error) => {
+                console.log(error.data)
                 setRegistrationSuccess(false);
                 setRegistrationError(true);
             });
     };
-
     const handleCloseSnackbar = () => {
         setRegistrationSuccess(false);
         setRegistrationError(false);
@@ -50,7 +52,10 @@ const EventCard = ({ event }) => {
                         {event.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    {event.date}
+                    {readableDate}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    {event.location}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {event.description}

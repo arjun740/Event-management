@@ -1,11 +1,11 @@
-import React from 'react';
-import {BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import MainPage from "./components/MainPage.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import EventPage from "./components/eventsComponent/EventPage.jsx";
 import RootLayout from "./components/RootLayout.jsx";
 import LoginForm from "./components/authentication/Login.jsx";
 import Registration from "./components/authentication/Registration.jsx";
+import {EventContextProvider} from "./EventContext.jsx";
 
 
 
@@ -34,7 +34,9 @@ const App = () => {
 
     return (
         <>
-            <RouterProvider router={router} />
+            <EventContextProvider>
+                <RouterProvider router={router} />
+            </EventContextProvider>
         </>
     );
 };

@@ -49,3 +49,32 @@ exports.getAllEvents = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.eventLocaions = catchAsync(async (req,res,next) => {
+    const location = await Event.distinct('location');
+    if(!location) return next(new AppError("location not Found",404));
+    res.status(200).json({
+        status :"success",
+        location
+    })
+})
+
+exports.autoComplete = catchAsync(async (req, res, next) => {
+    const searchString = req.query.searchString;
+    const suggestions = await Event.find({ title: { $regex: '^' + searchString, $options: 'i' } })
+        .select('title')
+        .limit(10);
+    res.status(200).json({
+        status: "success",
+        suggestions
+    });
+});
+
+exports.getEvent = catchAsync(async (req,res,next ) => {
+    const id = req.params.id
+    const event = await Event.findById(id);
+    if(!event) return next(new AppError("Could not able to Found a Event with given ID",404))
+    res.status(200).json({
+        status: "success",
+        event
+    });
+})

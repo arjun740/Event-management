@@ -2,12 +2,11 @@ import classes from './Login.module.css'
 import { FaUser } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import {Link, useNavigate} from 'react-router-dom';
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import axios from 'axios';
 const LoginForm = () =>{
 const navigate = useNavigate();
     const [formData, setFormData] = useState({ email: '', password: '', error: '', isLoggedIn: false });
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateFormData(formData)) {
@@ -20,7 +19,7 @@ const navigate = useNavigate();
             });
             const { token,user_id } = response.data;
             localStorage.setItem('token', token);
-            localStorage.setItem('user_id', token);
+            localStorage.setItem('user_id', user_id);
             localStorage.setItem('isLoggedIn', 'true');
             setFormData(prevState => ({ email: '', password: '', error: '', isLoggedIn: false }));
             navigate('/events');

@@ -1,25 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import  {useState, useEffect, useContext} from 'react';
 import './eventFilter.css'
+import axios from 'axios';
+import EventContext from "../../EventContext.jsx";
 function EventFilters() {
+    const {customEventQuery} = useContext(EventContext);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedLocation, setSelectedLocation] = useState('');
     const [locations, setLocations] = useState([]);
 
-
     useEffect(() => {
         const fetchLocations = async () => {
-            const response = await fetch('your-location-api-endpoint');
-            const data = await response.json();
-            setLocations(data.locations); // Replace with your API response structure
+            try {
+                const token = localStorage.getItem('token');
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                };
+                const response = await axios.get('http://localhost:3000/event/eventLocations',config);
+                const data = response.data.location
+                setLocations(data);
+            }catch (error) {
+                console.log(error)
+            }
         };
-
-        // fetchLocations();
+        fetchLocations();
     }, []);
 
     const handleCategoryClick = (category) => {
         const isSelected = selectedCategories.includes(category);
-
         if (isSelected) {
             setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
         } else {
@@ -37,12 +47,7 @@ function EventFilters() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        // Implement logic to send filter data (selectedCategories, selectedDate, selectedLocation)
-        // to your backend for filtering events
-        console.log('Filters:', selectedCategories, selectedDate, selectedLocation);
-
-        // Reset filters (optional)
+        customEventQuery(selectedCategories,selectedDate,selectedLocation)
         setSelectedCategories([]);
         setSelectedDate('');
         setSelectedLocation('');
@@ -61,8 +66,8 @@ function EventFilters() {
                             id="conferences"
                             name="category"
                             value="conference"
-                            checked={selectedCategories.includes('conferences')}
-                            onChange={() => handleCategoryClick('conferences')}
+                            checked={selectedCategories.includes('conference')}
+                            onChange={() => handleCategoryClick('conference')}
                         />
                         <label htmlFor="conferences">Conference</label>
                     </li>
@@ -72,8 +77,8 @@ function EventFilters() {
                             id="workshops"
                             name="category"
                             value="workshop"
-                            checked={selectedCategories.includes('workshops')}
-                            onChange={() => handleCategoryClick('workshops')}
+                            checked={selectedCategories.includes('workshop')}
+                            onChange={() => handleCategoryClick('workshop')}
                         />
                         <label htmlFor="workshops">Workshop</label>
                     </li>
@@ -83,8 +88,8 @@ function EventFilters() {
                             id="seminars"
                             name="category"
                             value="seminar"
-                            checked={selectedCategories.includes('seminars')}
-                            onChange={() => handleCategoryClick('seminars')}
+                            checked={selectedCategories.includes('seminar')}
+                            onChange={() => handleCategoryClick('seminar')}
                         />
                         <label htmlFor="seminars">Seminar</label>
                     </li>
@@ -94,8 +99,8 @@ function EventFilters() {
                             id="social-gatherings"
                             name="category"
                             value="social gathering"
-                            checked={selectedCategories.includes('social gatherings')}
-                            onChange={() => handleCategoryClick('social gatherings')}
+                            checked={selectedCategories.includes('social-gathering')}
+                            onChange={() => handleCategoryClick('social-gathering')}
                         />
                         <label htmlFor="social-gatherings">Social Gathering</label>
                     </li>
@@ -116,8 +121,8 @@ function EventFilters() {
                 <select value={selectedLocation} onChange={handleLocationChange}>
                     <option value="">All Locations</option>
                     {locations.map((location) => (
-                        <option key={location.id} value={location.id}>
-                            {location.name}
+                        <option key={location} value={location}>
+                            {location}
                         </option>
                     ))}
                 </select>

@@ -1,67 +1,29 @@
 import EventCard from "./EventCard.jsx";
-import dummyImage from './../assets/background.jpg'
-import conference from './../assets/conference.jpg'
-import workshops from './../assets/workshops.jpg'
-import socialGathering from './../assets/social gathering.jpg'
-import seminar from './../assets/seminar.jpg'
-
-
 import './events.css'
-import axios from 'axios';
-import {useEffect, useState} from "react";
+import {useContext} from "react";
+import EventContext from "../../EventContext.jsx";
 const Events = () =>{
-    const [events, setEvents] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                };
-                const response = await axios.get('http://localhost:3000/event/events',config);
-                const eventData = response.data.data.events;
-                console.log(eventData)
-                setEvents(eventData);
-                setIsLoading(false);
-            } catch (error) {
-                console.error('Error fetching events:', error);
-                setIsLoading(false);
-            }
-        };
-
-        fetchEvents();
-    }, []);
-    const eventData = {
-        id: 1,
-        name: "Sample Event",
-        date: "2024-04-15",
-        description: "This is a sample event description.",
-        type: "Conference",
-        totalCapacity: 100,
-        imageUrl:dummyImage
-    };
+    const {Event,isLoading} = useContext(EventContext)
+    console.log(Event)
     return (
         <div className={"eventContainer"}>
             {isLoading ? (
                 <p>Loading...</p>
-            ) : events.length === 0 ? (
+            ) : Event.length === 0 ? (
                 <p>No events currently available.</p>
             ) : (
-                events.map(event => (
+                Event.map(Event => (
                     <EventCard
-                        key={event._id}
+                        key={Event['_id']}
                         event={{
-                            id: event._id,
-                            name: event.title,
-                            date: event.date,
-                            description: event.description,
-                            type: event.category,
-                            totalCapacity: event.capacity,
-                            imageUrl: event.image
+                            id: Event['_id'],
+                            name: Event.title,
+                            date: Event.date,
+                            description: Event.description,
+                            type: Event.category,
+                            totalCapacity: Event.capacity,
+                            imageUrl: Event.image,
+                            location:Event.location
                         }}
                     />
                 ))
@@ -70,3 +32,26 @@ const Events = () =>{
         )
 }
 export default Events;
+// const [events, setEvents] = useState([]);
+// const [isLoading, setIsLoading] = useState(true);
+// useEffect(() => {
+//     const fetchEvents = async () => {
+//         try {
+//             const token = localStorage.getItem('token');
+//             const config = {
+//                 headers: {
+//                     Authorization: `Bearer ${token}`
+//                 }
+//             };
+//             const response = await axios.get('http://localhost:3000/event/events',config);
+//             const eventData = response.data.data.events;
+//             setEvents(eventData);
+//             setIsLoading(false);
+//         } catch (error) {
+//             console.error('Error fetching events:', error);
+//             setIsLoading(false);
+//         }
+//     };
+//
+//     fetchEvents();
+// }, []);

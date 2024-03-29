@@ -1,4 +1,4 @@
-import React from 'react';
+import {Link} from 'react-router-dom'
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -12,15 +12,14 @@ const Footer = () => {
                 <div className={styles.footerColumn}>
                     <h4>Quick Links</h4>
                     <ul className={styles.links}>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Destinations</a></li>
-                        <li><a href="#">Packages</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to={"/events"}>Events</Link></li>
+                        <li><Link to={"/events"}>Contact</Link></li>
                     </ul>
                 </div>
                 <div className={styles.footerColumn}>
                     <h4>Contact Us</h4>
-                    <p>123 Travel Street, City, Country</p>
+                    <p>123 Event Street, City, Country</p>
                     <p>Email: info@example.com</p>
                     <p>Phone: +123 456 7890</p>
                 </div>

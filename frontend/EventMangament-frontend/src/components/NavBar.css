@@ -45,8 +45,8 @@
     text-decoration: none;
 }
 .nav-links button:hover{
-    background-color: transparent;
-    text-decoration: underline;
+    /*background-color: transparent;*/
+    /*text-decoration: underline;*/
 }
 
 .nav-links a:hover {
@@ -75,9 +75,17 @@
 }
 .btn-sign-up{
     border: 1px solid #007bff;
-    background-color: #e9ecef;
+    background-color: transparent ;
     color: #212529;
 }
 .logout-btn{
     background-color: #007bff;
+}
+.logout-btn:hover{
+    background-color: transparent;
+    border: 1px solid #007bff;
+}
+.btn-event:hover{
+    background-color: transparent;
+    text-decoration: underline;
 }

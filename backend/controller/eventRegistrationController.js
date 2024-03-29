@@ -3,13 +3,9 @@ const AppError = require('./../util/AppError')
 const Registration = require('../model/registrationModel');
 const User = require('../model/userModel');
 const Event = require('../model/eventModel');
-const { validationResult } = require('express-validator');
 exports.registerForEvent = catchAsync(async (req,res,next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return next(new AppError('Validation failed', 400, errors.array()));
-    }
-    const user = await User.findById(req.body.user_id);
+
+    const user = await User.findById(req.user['_id']);
     if (!user) {
         return next(new AppError('User not found', 404));
     }
@@ -18,14 +14,14 @@ exports.registerForEvent = catchAsync(async (req,res,next) => {
         return next(new AppError('Event not found', 404));
     }
     const existingRegistration = await Registration.findOne({
-        user_id: req.body.user_id,
+        user_id:req.user['_id'],
         event_id: req.body.event_id
     });
     if (existingRegistration) {
         throw new AppError('User is already registered for the event', 400);
     }
     const newRegistration = new Registration({
-        user_id: req.body.user_id,
+        user_id: req.user['_id'],
         event_id: req.body.event_id
     });
     await newRegistration.save();

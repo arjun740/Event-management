@@ -1,6 +1,6 @@
 import classes from './Registration.module.css'
 import { FcGoogle } from "react-icons/fc";
-import {FaGoogle, FaUser} from "react-icons/fa";
+import {FaUser} from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
@@ -19,8 +19,9 @@ const Registration = () => {
                 email: formData.email,
                 password: formData.password
             });
-            const { token } = response.data;
+            const { token,user_id } = response.data;
             localStorage.setItem('token', token);
+            localStorage.setItem('user_id', user_id);
             localStorage.setItem('isLoggedIn', 'true');
             setFormData(prevState => ({ username: '', email: '', password: '', error: '', isLoggedIn: false }));
             navigate('/events');
