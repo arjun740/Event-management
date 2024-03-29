@@ -23,7 +23,7 @@ const Registration = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('user_id', user_id);
             localStorage.setItem('isLoggedIn', 'true');
-            setFormData(prevState => ({ username: '', email: '', password: '', error: '', isLoggedIn: false }));
+            setFormData(() => ({ username: '', email: '', password: '', error: '', isLoggedIn: false }));
             navigate('/events');
         } catch (error) {
             setFormData(prevState => ({ ...prevState,error: 'Invalid email or password' }));
