@@ -21,7 +21,7 @@ const navigate = useNavigate();
             localStorage.setItem('token', token);
             localStorage.setItem('user_id', user_id);
             localStorage.setItem('isLoggedIn', 'true');
-            setFormData(prevState => ({ email: '', password: '', error: '', isLoggedIn: false }));
+            setFormData(() => ({ email: '', password: '', error: '', isLoggedIn: false }));
             navigate('/events');
 
         } catch (error) {
